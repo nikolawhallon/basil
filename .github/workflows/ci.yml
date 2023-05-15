@@ -31,3 +31,6 @@ jobs:
 
       - name: Echo on server
         run: ssh basil 'date > date.txt'
+
+      - name: Run script on server
+        run: ssh basil 'rm -rf basil && git clone git@github.com-basil:nikolawhallon/basil.git && cd basil && source hello_world.sh'
