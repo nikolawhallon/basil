@@ -13,3 +13,21 @@ jobs:
       - name: Hello World
         run: |
           echo "Hello World"
+
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$SSH_KEY" > ~/.ssh/basil
+          chmod 600 ~/.ssh/basil
+          cat >>~/.ssh/config <<END
+          Host basil
+            HostName 207.154.230.183
+            User basil
+            IdentityFile ~/.ssh/basil
+            StrictHostKeyChecking no
+          END
+        env:
+          SSH_KEY: ${{ secrets.SSH_KEY }}
+
+      - name: Echo on server
+        run: ssh basil 'date > date.txt'
