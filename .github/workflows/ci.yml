@@ -15,7 +15,8 @@ jobs:
         with:
           fetch-depth: 0
       - name: Script
-        cd basil && source hello_world.sh && cd ..
+        run: |
+          cd basil && source hello_world.sh && cd ..
       - name: Hello World
         run: |
           echo "Hello World"
